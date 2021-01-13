@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import shortid from 'shortid';
+// import shortid from 'shortid';
 // import ColorPicker from './components/ColorPicker';
-import Counter from './components/Counter';
+// import Counter from './components/Counter';
 import Container from './components/Container';
-import TodoList from './components/TodoList';
+// import TodoList from './components/TodoList';
 import TodoEditor from './components/TodoEditor';
-import Filter from './components/TodoFilter';
+// import Filter from './components/TodoFilter';
 import Modal from './components/Modal';
 import IconButton from './components/IconButton';
 import { ReactComponent as AddIcon } from './icons/add.svg';
@@ -17,44 +17,42 @@ import { ReactComponent as AddIcon } from './icons/add.svg';
 
 class App extends Component {
   state = {
-    todos: [],
-    filter: '',
     showModal: false,
   };
 
-  componentDidMount() {
-    const todos = localStorage.getItem('todos');
-    const parsedTodos = JSON.parse(todos);
+  // componentDidMount() {
+  //   const todos = localStorage.getItem('todos');
+  //   const parsedTodos = JSON.parse(todos);
 
-    if (parsedTodos) {
-      this.setState({ todos: parsedTodos });
-    }
-  }
+  //   if (parsedTodos) {
+  //     this.setState({ todos: parsedTodos });
+  //   }
+  // }
 
-  componentDidUpdate(prevProps, prevState) {
-    const nextTodos = this.state.todos;
-    const prevTodos = prevState.todos;
+  // componentDidUpdate(prevProps, prevState) {
+  //   const nextTodos = this.state.todos;
+  //   const prevTodos = prevState.todos;
 
-    if (nextTodos !== prevTodos) {
-      localStorage.setItem('todos', JSON.stringify(nextTodos));
-    }
+  //   if (nextTodos !== prevTodos) {
+  //     localStorage.setItem('todos', JSON.stringify(nextTodos));
+  //   }
 
-    if (nextTodos.length > prevTodos.length && prevTodos.length !== 0) {
-      this.toggleModal();
-    }
-  }
+  //   if (nextTodos.length > prevTodos.length && prevTodos.length !== 0) {
+  //     this.toggleModal();
+  //   }
+  // }
 
-  addTodo = text => {
-    const todo = {
-      id: shortid.generate(),
-      text,
-      completed: false,
-    };
+  // addTodo = text => {
+  //   const todo = {
+  //     id: shortid.generate(),
+  //     text,
+  //     completed: false,
+  //   };
 
-    this.setState(({ todos }) => ({
-      todos: [todo, ...todos],
-    }));
-  };
+  //   this.setState(({ todos }) => ({
+  //     todos: [todo, ...todos],
+  //   }));
+  // };
 
   deleteTodo = todoId => {
     this.setState(prevState => ({
@@ -63,19 +61,6 @@ class App extends Component {
   };
 
   toggleCompleted = todoId => {
-    // this.setState(prevState => ({
-    //   todos: prevState.todos.map(todo => {
-    //     if (todo.id === todoId) {
-    //       return {
-    //         ...todo,
-    //         completed: !todo.completed,
-    //       };
-    //     }
-
-    //     return todo;
-    //   }),
-    // }));
-
     this.setState(({ todos }) => ({
       todos: todos.map(todo =>
         todo.id === todoId ? { ...todo, completed: !todo.completed } : todo,
@@ -112,10 +97,10 @@ class App extends Component {
   };
 
   render() {
-    const { todos, filter, showModal } = this.state;
-    const totalTodoCount = todos.length;
-    const completedTodoCount = this.calculateCompletedTodos();
-    const visibleTodos = this.getVisibleTodos();
+    const { showModal } = this.state;
+    // const totalTodoCount = todos.length;
+    // const completedTodoCount = this.calculateCompletedTodos();
+    // const visibleTodos = this.getVisibleTodos();
 
     return (
       <Container>
@@ -130,24 +115,24 @@ class App extends Component {
 
         {showModal && (
           <Modal onClose={this.toggleModal}>
-            <TodoEditor onSubmit={this.addTodo} />
+            <TodoEditor />
           </Modal>
         )}
 
         {/* TODO: вынести в отдельный компонент */}
-        <div>
+        {/* <div>
           <p>Всего заметок: {totalTodoCount}</p>
           <p>Выполнено: {completedTodoCount}</p>
-        </div>
+        </div> */}
 
-        <Filter value={filter} onChange={this.changeFilter} />
+        {/* <Filter value={filter} onChange={this.changeFilter} /> */}
 
-        <TodoList
+        {/* <TodoList
           todos={visibleTodos}
           onDeleteTodo={this.deleteTodo}
           onToggleCompleted={this.toggleCompleted}
-        />
-        <Counter />
+        /> */}
+        {/* <Counter /> */}
       </Container>
     );
   }
