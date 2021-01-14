@@ -1,3 +1,6 @@
+import { connect } from 'react-redux';
+import todosActions from '../../redux/todos/todos-actions';
+
 import './TodoFilter.scss';
 
 const TodoFilter = ({ value, onChange }) => (
@@ -12,4 +15,12 @@ const TodoFilter = ({ value, onChange }) => (
   </div>
 );
 
-export default TodoFilter;
+const mapStateToProp = state => ({
+  value: state.todos.filter,
+});
+
+const mapDispatchToProp = dispatch => ({
+  onChange: e => dispatch(todosActions.changeFilter(e.target.value)),
+});
+
+export default connect(mapStateToProp, mapDispatchToProp)(TodoFilter);

@@ -12,7 +12,12 @@ const addTodo = text => ({
 
 const deleteTodo = todoId => ({
   type: types.DELETE,
-  psyload: todoId,
+  payload: todoId,
 });
 
-export default { addTodo, deleteTodo };
+const changeFilter = value => ({
+  type: types.CHANGE_FILTER,
+  payload: value,
+});
+
+export default { addTodo, deleteTodo, changeFilter };
